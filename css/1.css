@@ -21,3 +21,15 @@ input[type="text"] {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+li {
+  background-color: gray;
+  font-size: 40px;
+  border: 1px solid black;
+  margin: 2px 2px 6px;
+  color: white;
+}
+ul {
+  width: 100%;
+  text-align: left;
+}
