@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
         }
     }
 
-    let taskId=0;
+    let taskId = 0;
 
     function GetTextFromUser() { //Check if appear text in Textbox
         if ($('#taskText').val()) {
@@ -34,23 +34,29 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
         }
     });
 
+    let lst = document.querySelector('.lst');
+
     function addItemToList(myTxt) {
         taskId++;
-
         let ul = document.getElementById("mainList");
         let listItem = document.createElement("li");
-        let checkBoxItem=document.createElement("input");
-        let trashIcon=document.createElement("img");
-
-        checkBoxItem.setAttribute("type","checkbox");
-        listItem.setAttribute("id",`taskID ${taskId}`); //String Literal
-        trashIcon.setAttribute("src","../images/trash.png"); 
-        trashIcon.setAttribute("align","right"); 
+        let checkBoxItem = document.createElement("input");
+        let trashIcon = document.createElement("img");
+        let SpanToolTip = document.createElement("span");
+        checkBoxItem.setAttribute("type", "checkbox");
+        listItem.setAttribute("id", `taskID${taskId}`); //String Literal
+        listItem.setAttribute("class", "listItem");
+        trashIcon.setAttribute("src", "../images/trash.png");
+        trashIcon.setAttribute("align", "right");
+        trashIcon.setAttribute("id", "trashIcon");
+        trashIcon.setAttribute("class", "trashIconClass");
+        trashIcon.setAttribute("title", "Remove task");
         listItem.appendChild(checkBoxItem);
-        listItem.appendChild(document.createTextNode(` ${myTxt}` ));
+        listItem.appendChild(document.createTextNode(` ${myTxt}`));
         listItem.appendChild(trashIcon);
         ul.appendChild(listItem);
+        $(".listItem").on("click", function (event) {
+            this.remove();
+        });
     }
-
-
 });
