@@ -33,3 +33,7 @@ ul {
   width: 100%;
   text-align: left;
 }
+
+.lineThrough{
+    text-decoration: line-through;
+}

@@ -1,14 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => { //Wait till page finally loaded
-
-    class Dolist {
-        constructor() {
-            name
-            checked
-
-            alert("hi");
-        }
-    }
-
     let taskId = 0;
 
     function GetTextFromUser() { //Check if appear text in Textbox
@@ -55,8 +45,20 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
         listItem.appendChild(document.createTextNode(` ${myTxt}`));
         listItem.appendChild(trashIcon);
         ul.appendChild(listItem);
+        $(".trashIconClass").on("click", function (event) {
+            removeitem(this);
+        });
+
         $(".listItem").on("click", function (event) {
-            this.remove();
+            doneItem(this);
         });
     }
-});
+
+    function removeitem(w) {
+        w.parentElement.remove();
+    }
+
+    function doneItem(w) {
+        w.classList.add("lineThrough" );
+    }
+}); 
