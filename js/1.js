@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => { //Wait till page finally loaded
-    let taskId = 0;
+    let tasks = 0;
+    let todo = 0;
 
     function GetTextFromUser() { //Check if appear text in Textbox
         if ($('#taskText').val()) {
@@ -24,41 +25,59 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
         }
     });
 
-    let lst = document.querySelector('.lst');
+
+    let doneList = document.getElementsByClassName('doneList');
+    let titleNameTasks = document.getElementById("taskTitleId");
+    let titleNameDone = document.getElementsByClassName("doneTitle")
 
     function addItemToList(myTxt) {
-        taskId++;
-        let ul = document.getElementById("mainList");
+        tasks++;
+        // showHideTitle(titleNameTasks);
+        let listOfItems = document.getElementById("taskList");
         let listItem = document.createElement("li");
         let checkBoxItem = document.createElement("input");
         let trashIcon = document.createElement("img");
-        let SpanToolTip = document.createElement("span");
         checkBoxItem.setAttribute("type", "checkbox");
-        listItem.setAttribute("id", `taskID${taskId}`); //String Literal
-        listItem.setAttribute("class", "listItem");
-        trashIcon.setAttribute("src", "../images/trash.png");
-        trashIcon.setAttribute("align", "right");
-        trashIcon.setAttribute("id", "trashIcon");
-        trashIcon.setAttribute("class", "trashIconClass");
-        trashIcon.setAttribute("title", "Remove task");
+
+        $(listItem).attr(
+            {
+                "class": "listItem"
+            });
+        $(trashIcon).attr(
+            {
+                "src": "../images/trash.png",
+                "align": "right",
+                "id": "trashIconId",
+                "class": "trashIconClass",
+                "title": "Remove task"
+            });
+
         listItem.appendChild(checkBoxItem);
         listItem.appendChild(document.createTextNode(` ${myTxt}`));
         listItem.appendChild(trashIcon);
-        ul.appendChild(listItem);
-        $(".trashIconClass").on("click", function (event) {
-            removeitem(this);
-        });
-
-        $(".listItem").on("click", function (event) {
-            doneItem(this);
-        });
+        listOfItems.appendChild(listItem);
+        trashIcon.onclick = removeItem;
+        listItem.onclick = doneItem;
     }
 
-    function removeitem(w) {
-        w.parentElement.remove();
-    }
+    function removeItem(e) {
+        if (e.target.nodeName === "IMG" && e.target.parentElement.parentElement.className === "lst") {
+            tasks--;
+        }
+        if (e.target.nodeName === "IMG" && e.target.parentElement.parentElement.className === "doneList") {
+            todo--;
+        }
+        e.target.parentElement.remove(e.target);
 
-    function doneItem(w) {
-        w.classList.add("lineThrough" );
+    }
+    function doneItem(e) {
+        if (e.target.nodeName === "LI" && e.target.parentElement.id === "taskList") {
+            tasks--;
+            todo++
+            e.target.remove(e.target);
+            e.target.classList.remove("listItem");
+            e.target.classList.add("doneTitle");
+            doneList[0].appendChild(e.target);
+        }
     }
 }); 

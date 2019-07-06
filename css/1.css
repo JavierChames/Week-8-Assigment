@@ -34,6 +34,26 @@ ul {
   text-align: left;
 }
 
-.lineThrough{
-    text-decoration: line-through;
+.lineThrough {
+  text-decoration: line-through;
 }
+
+/* .doneTitle  {
+  visibility: hidden;
+} */
+
+/* h1.doneTitle  {
+  visibility: hidden;
+} */
+
+/* .taskTitle {
+    visibility: hidden;
+  } */
+  
+  /* h1.taskTitle  {
+    visibility: hidden;
+  } */
+
+  .space{
+      padding:5%;
+  }
