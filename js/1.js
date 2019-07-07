@@ -26,18 +26,13 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
     });
 
 
-    let doneList = document.getElementsByClassName('doneList');
-    let titleNameTasks = document.getElementById("taskTitleId");
-    let titleNameDone = document.getElementsByClassName("doneTitle")
-
+    let doneList = document.getElementById('doneList');
+    let taskList = document.getElementById("taskList");
     function addItemToList(myTxt) {
         tasks++;
-        // showHideTitle(titleNameTasks);
         let listOfItems = document.getElementById("taskList");
         let listItem = document.createElement("li");
-        let checkBoxItem = document.createElement("input");
         let trashIcon = document.createElement("img");
-        checkBoxItem.setAttribute("type", "checkbox");
 
         $(listItem).attr(
             {
@@ -52,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
                 "title": "Remove task"
             });
 
-        listItem.appendChild(checkBoxItem);
         listItem.appendChild(document.createTextNode(` ${myTxt}`));
         listItem.appendChild(trashIcon);
         listOfItems.appendChild(listItem);
@@ -61,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
     }
 
     function removeItem(e) {
-        if (e.target.nodeName === "IMG" && e.target.parentElement.parentElement.className === "lst") {
+        if (e.target.nodeName === "IMG" && e.target.parentElement.parentElement.className === "taskList") {
             tasks--;
         }
         if (e.target.nodeName === "IMG" && e.target.parentElement.parentElement.className === "doneList") {
@@ -71,13 +65,22 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
 
     }
     function doneItem(e) {
-        if (e.target.nodeName === "LI" && e.target.parentElement.id === "taskList") {
-            tasks--;
-            todo++
-            e.target.remove(e.target);
-            e.target.classList.remove("listItem");
-            e.target.classList.add("doneTitle");
-            doneList[0].appendChild(e.target);
+        if (e.target.nodeName === "LI") {
+            if (e.target.parentElement.id === "taskList") {
+                tasks--;
+                todo++;
+                e.target.remove(e.target);
+                e.target.classList.remove("listItem");
+                e.target.classList.add("doneList");
+                doneList.appendChild(e.target);
+            } else if (e.target.parentElement.id === "doneList") {
+                tasks++;
+                todo--;
+                e.target.remove(e.target);
+                e.target.classList.remove("doneList");
+                e.target.classList.add("listItem");
+                taskList.appendChild(e.target);
+            }
         }
     }
 }); 
