@@ -26,18 +26,15 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
     });
 
 
-    let doneList = document.getElementById('doneList');
-    let taskList = document.getElementById("taskList");
+    let doneList =$('#doneList')[0];
+    let taskList = $('#taskList')[0];
+
     function addItemToList(myTxt) {
         tasks++;
-        let listOfItems = document.getElementById("taskList");
-        let listItem = document.createElement("li");
-        let trashIcon = document.createElement("img");
+        let listItem = $('<li/>')[0];
+        let trashIcon = $('<img/>')[0];
 
-        $(listItem).attr(
-            {
-                "class": "listItem"
-            });
+        $(listItem).attr("class", "listItem")
         $(trashIcon).attr(
             {
                 "src": "../images/trash.png",
@@ -49,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => { //Wait till page finally l
 
         listItem.appendChild(document.createTextNode(` ${myTxt}`));
         listItem.appendChild(trashIcon);
-        listOfItems.appendChild(listItem);
+        taskList.appendChild(listItem);
         trashIcon.onclick = removeItem;
         listItem.onclick = doneItem;
     }
